@@ -30,15 +30,6 @@ angular.module('app', ['ionic', 'app.controllers', 'firebase'])
       controller: 'appCtrl'
     })
 
-    .state('app.feed', {
-      url: "/feed",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/social/feed.html"
-        }
-      }
-    })
-
     .state('app.start', {
       url: "/start",
       views: {
@@ -183,9 +174,44 @@ angular.module('app', ['ionic', 'app.controllers', 'firebase'])
       }
     })
 
+    .state('app.feed', {
+        url: '/feed',
+        views: {
+        'menuContent' :{
+          templateUrl: "templates/social/feed.html",
+        }
+        },
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.auth.$requireAuth().catch(function(){
+              $state.go('app.login');
+            });
+          }
+        },
+        controller: 'appCtrl'
+    })
     
+    .state('app.logout', {
+        url: '/logout',
+        views: {
+        'menuContent' :{
+          templateUrl: "templates/social/login.html",
+          }
+        },
+        resolve: {
+          auth: function ($state, Users, Auth) {
+            return Auth.auth.$unauth().catch(function () {
+              $state.go('app.login');
+            }, function (error) {
+              $state.go('app.login');
+              return;
+            });
+          }
+        }
+    })
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/login');
+  $urlRouterProvider.otherwise('/app/feed');
 })
 
  .constant('FirebaseUrl', 'https://pakapp.firebaseio.com/');

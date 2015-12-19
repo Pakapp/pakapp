@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('appCtrl', function($scope, $timeout, $state, Users, $filter, Auth) {
+.controller('appCtrl', function($scope, $timeout, $state, Users, $filter, Auth, Farms, Packages) {
 
   $scope.goto = function(state){
       $state.go(state);
@@ -8,6 +8,8 @@ angular.module('app.controllers', [])
 
   $scope.users  = Users;
   $scope.auth   = Auth;
+  $scope.packages = Packages;
+  $scope.farms = Farms;
 
   $scope.user = {
           email: '',
@@ -34,8 +36,6 @@ angular.module('app.controllers', [])
             fb_locationID:    authData.facebook.cachedUserProfile.location.id,
             fb_location_name: authData.facebook.cachedUserProfile.location.name,
             join:             $filter('date')(new Date(), 'yyyy-MM-dd'),
-
-
           });
           $state.go('app.feed');
         }
