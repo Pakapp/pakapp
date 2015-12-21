@@ -36,16 +36,19 @@
     </div>
     <!-- ======================
     /END SEARCH FORM
-    ====================== --> 
+    ====================== -->
 
-    <ion-item ng-repeat="pk in packages">
+    <ion-list ng-repeat="pk in packages">
       <!-- ======================
       POST - image only
       ====================== --> 
       <div class="news-media">
         <img src="img/gemionic/news-image.jpg" alt="" class="fluid-image">
         <div class="media-social-stats">
-          <button class="button button-small button-borderless button-positive"><i class="icon ion-heart"></i></button>
+          <button ng-show="profile.subscriptions[pk.$id]" class="button button-small button-borderless button-positive"><i class="icon ion-heart"></i></button>
+
+          <button ng-show="!profile.subscriptions[pk.$id]" ng-click="subscribe(pk.$id)"
+          class="button button-small"><i class="icon ion-heart balanced"></i></button>
         </div>
       </div>
       
@@ -54,12 +57,12 @@
       ====================== --> 
       <div class="news-item">
         <div class="news-thumb">
-          <img src="img/gemionic/profile-image.jpg" alt="" class="img">
+          <img src="img/gemionic/post-img.jpg" alt="" class="img">
         </div>
         <div class="news-content">
           <h4>{{pk.name}}</h4>
           <div class="gem-tiny-text news-item-stats">
-            <i class="icon ion-clock"></i> 2 days ago
+            <i class="icon ion-ios-home"></i> {{pk.farm[0]}}
             <span class="news-comment-summary">
               <i class="icon ion-heart"></i> 2 
               <i class="icon ion-chatbubble"></i> 3
@@ -71,7 +74,7 @@
         </div>
       </div>
 
-    </ion-item>
+    </ion-list>
     <!-- ======================
     /END POSTER
     ====================== --> 

@@ -1,7 +1,8 @@
-angular.module('app.controllers', [])
+angular.module('app')
 
-.controller('appCtrl', function($scope, $timeout, $state, Users, $filter, Auth, Farms, Packages) {
+.controller('appCtrl', function($scope, $timeout, $state, Users, $filter, Auth, Farms, Packages, profile) {
 
+  var appCtrl = this;
   $scope.goto = function(state){
       $state.go(state);
   };
@@ -10,6 +11,11 @@ angular.module('app.controllers', [])
   $scope.auth   = Auth;
   $scope.packages = Packages;
   $scope.farms = Farms;
+  $scope.profile = profile;
+
+  // console.log($scope.packages);
+  // console.log($scope.farms);
+  console.log($scope.profile);
 
   $scope.user = {
           email: '',
@@ -45,13 +51,8 @@ angular.module('app.controllers', [])
 
     }
 
-
-    $scope.login = function (){
-      Auth.auth.$authWithPassword(authCtrl.user).then(function (auth){
-        $state.go('home');
-      }, function (error){
-        authCtrl.error = error;
-      });
-    };;
+    $scope.subscribe = function($pid){
+      $scope.users.userRef.child($scope.profile.$id).child('subscriptions').push($pid).set(true);
+    }
 
 })

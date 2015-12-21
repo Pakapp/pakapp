@@ -1,10 +1,9 @@
 // Ionic Starter App
-
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'firebase'])
+angular.module('app', ['ionic', 'firebase'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -23,11 +22,40 @@ angular.module('app', ['ionic', 'app.controllers', 'firebase'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+      .state('app.home', {
+        url: '/',
+        views: {
+          'menuContent' :{
+            controller: 'appCtrl',
+            templateUrl: "templates/social/feed.html"
+          }
+        }
+      })
+
     .state('app', {
       url: "/app",
       abstract: true,
       templateUrl: "templates/social/menu.html",
-      controller: 'appCtrl'
+      controller: 'appCtrl',
+      resolve: {
+              auth: function($state, Users, Auth){
+                return Auth.auth.$requireAuth().catch(function(){
+                  $state.go('app.login');
+                });
+              },
+              profile: function(Users, Auth,$state){
+                return Auth.auth.$requireAuth().then(function(auth){
+                  return Users.getProfile(auth.uid).$loaded().then(function (profile) {
+                    if (profile) {
+                      // console.log(profile);
+                      return profile;
+                    } else {
+                      $state.go('app.login');
+                    }
+                  });
+                });
+              }
+            }
     })
 
     .state('app.start', {
@@ -177,18 +205,30 @@ angular.module('app', ['ionic', 'app.controllers', 'firebase'])
     .state('app.feed', {
         url: '/feed',
         views: {
-        'menuContent' :{
-          templateUrl: "templates/social/feed.html",
-        }
+          'menuContent' :{
+            templateUrl: "templates/social/feed.html",
+          }
         },
+        controller: 'appCtrl',
         resolve: {
           auth: function($state, Users, Auth){
             return Auth.auth.$requireAuth().catch(function(){
               $state.go('app.login');
             });
+          },
+          profile: function(Users, Auth,$state){
+            return Auth.auth.$requireAuth().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded().then(function (profile) {
+                if (profile) {
+                  console.log(profile);
+                  return profile;
+                } else {
+                  $state.go('app.login');
+                }
+              });
+            });
           }
-        },
-        controller: 'appCtrl'
+        }
     })
     
     .state('app.logout', {
@@ -211,7 +251,7 @@ angular.module('app', ['ionic', 'app.controllers', 'firebase'])
     })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/feed');
+  $urlRouterProvider.otherwise('/app/');
 })
 
  .constant('FirebaseUrl', 'https://pakapp.firebaseio.com/');
