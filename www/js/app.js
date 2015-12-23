@@ -22,43 +22,77 @@ angular.module('app', ['ionic', 'firebase'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-      .state('app.home', {
-        url: '/',
-        views: {
-          'menuContent' :{
-            controller: 'appCtrl',
-            templateUrl: "templates/social/feed.html"
-          }
-        }
-      })
-
     .state('app', {
       url: "/app",
       abstract: true,
       templateUrl: "templates/social/menu.html",
       controller: 'appCtrl',
-      resolve: {
-              auth: function($state, Users, Auth){
-                return Auth.auth.$requireAuth().catch(function(){
-                  $state.go('app.login');
-                });
-              },
-              profile: function(Users, Auth,$state){
-                return Auth.auth.$requireAuth().then(function(auth){
-                  return Users.getProfile(auth.uid).$loaded().then(function (profile) {
-                    if (profile) {
-                      // console.log(profile);
-                      return profile;
-                    } else {
-                      $state.go('app.login');
-                    }
-                  });
-                });
-              }
-            }
+            resolve: {
+        auth: function($state, Users, Auth){
+            return Auth.auth.$requireAuth().catch(function(){
+              console.log('no auth');
+              $state.go('login');
+            });
+        },
+        profile: function(Users, Auth, $state){
+          return Auth.auth.$requireAuth()
+                  .then(function(auth){
+                    return Users.getProfile(auth.uid).$loaded()
+                      .then(function (profile) {
+                          return profile;
+                      })
+                      .catch(function(){
+                          $state.go('login');
+                      });
+                      // if (profile) {
+                      //   console.log(profile);
+                      //   return profile;
+                      // } 
+                      // else {
+                      //   $state.go('login');
+                      // }
+                    });
+        }         
+      }
     })
 
-    .state('app.start', {
+    .state('app.home', {
+      url: '/',
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/social/feed.html",
+        }
+      }
+      // resolve: {
+      //   auth: function($state, Users, Auth){
+      //       return Auth.auth.$requireAuth().catch(function(){
+      //         console.log('no auth');
+      //         $state.go('login');
+      //       });
+      //   },
+      //   profile: function(Users, Auth, $state){
+      //     return Auth.auth.$requireAuth()
+      //             .then(function(auth){
+      //               return Users.getProfile(auth.uid).$loaded()
+      //                 .then(function (profile) {
+      //                     return profile;
+      //                 })
+      //                 .catch(function(){
+      //                     $state.go('login');
+      //                 });
+      //                 // if (profile) {
+      //                 //   console.log(profile);
+      //                 //   return profile;
+      //                 // } 
+      //                 // else {
+      //                 //   $state.go('login');
+      //                 // }
+      //               });
+      //   }         
+      // }
+    })
+
+    .state('start', {
       url: "/start",
       views: {
         'menuContent' :{
@@ -67,7 +101,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.fgrid', {
+    .state('fgrid', {
       url: "/fgrid",
       views: {
         'menuContent' :{
@@ -76,7 +110,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.flist', {
+    .state('flist', {
       url: "/flist",
       views: {
         'menuContent' :{
@@ -85,7 +119,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.newpost', {
+    .state('newpost', {
       url: "/newpost",
       views: {
         'menuContent' :{
@@ -94,7 +128,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.email', {
+    .state('email', {
       url: "/email",
       views: {
         'menuContent' :{
@@ -103,7 +137,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })    
 
-    .state('app.profile', {
+    .state('profile', {
       url: "/profile",
       views: {
         'menuContent' :{
@@ -112,7 +146,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.timeline', {
+    .state('timeline', {
       url: "/timeline",
       views: {
         'menuContent' :{
@@ -121,7 +155,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.editprofile', {
+    .state('editprofile', {
       url: "/editprofile",
       views: {
         'menuContent' :{
@@ -130,7 +164,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.profiletwo', {
+    .state('profiletwo', {
       url: "/profiletwo",
       views: {
         'menuContent' :{
@@ -139,7 +173,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.profilethree', {
+    .state('profilethree', {
       url: "/profilethree",
       views: {
         'menuContent' :{
@@ -148,7 +182,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.news', {
+    .state('news', {
       url: "/news",
       views: {
         'menuContent' :{
@@ -157,7 +191,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.viewpost', {
+    .state('viewpost', {
       url: "/viewpost",
       views: {
         'menuContent' :{
@@ -166,7 +200,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.viewposttwo', {
+    .state('viewposttwo', {
       url: "/viewposttwo",
       views: {
         'menuContent' :{
@@ -175,7 +209,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.invite', {
+    .state('invite', {
       url: "/invite",
       views: {
         'menuContent' :{
@@ -184,71 +218,72 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.login', {
+    .state('login', {
       url: "/login",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/social/login.html",
-        }
-      }
+      controller: 'authCtrl',
+      templateUrl: "templates/social/login.html",
     })
 
-    .state('app.signup', {
+    .state('signup', {
       url: "/signup",
       views: {
         'menuContent' :{
+          controller: 'appCtrl',
           templateUrl: "templates/social/signup.html",
         }
       }
     })
 
-    .state('app.feed', {
-        url: '/feed',
-        views: {
-          'menuContent' :{
-            templateUrl: "templates/social/feed.html",
-          }
-        },
-        controller: 'appCtrl',
-        resolve: {
-          auth: function($state, Users, Auth){
-            return Auth.auth.$requireAuth().catch(function(){
-              $state.go('app.login');
-            });
-          },
-          profile: function(Users, Auth,$state){
-            return Auth.auth.$requireAuth().then(function(auth){
-              return Users.getProfile(auth.uid).$loaded().then(function (profile) {
-                if (profile) {
-                  console.log(profile);
-                  return profile;
-                } else {
-                  $state.go('app.login');
-                }
-              });
-            });
-          }
-        }
-    })
+    // .state('feed', {
+    //     url: '/feed',
+    //     views: {
+    //       'menuContent' :{
+    //         templateUrl: "templates/social/feed.html",
+    //       }
+    //     },
+    //     controller: 'appCtrl',
+    //     resolve: {
+    //       auth: function($state, Users, Auth){
+    //         return Auth.auth.$requireAuth().catch(function(){
+    //           $state.go('login');
+    //         });
+    //       },
+    //       profile: function(Users, Auth,$state){
+    //         return Auth.auth.$requireAuth().then(function(auth){
+    //           return Users.getProfile(auth.uid).$loaded().then(function (profile) {
+    //             if (profile) {
+    //               console.log(profile);
+    //               return profile;
+    //             } else {
+    //               $state.go('login');
+    //             }
+    //           });
+    //         });
+    //       }
+    //     }
+    // })
     
     .state('app.logout', {
         url: '/logout',
-        views: {
-        'menuContent' :{
-          templateUrl: "templates/social/login.html",
-          }
-        },
-        resolve: {
-          auth: function ($state, Users, Auth) {
-            return Auth.auth.$unauth().catch(function () {
-              $state.go('app.login');
-            }, function (error) {
-              $state.go('app.login');
-              return;
-            });
-          }
-        }
-    })
+        templateUrl: "templates/social/login.html",
+        // resolve: {
+        //   auth: function ($state, Users, Auth) {
+        //     return Auth.auth.$unauth()
+        //       .then(function()
+        //       {
+        //         $state.go('login', null, {reload: true});
+        //       })
+        //       .catch(function () {
+        //         $state.go('login', null, {reload: true});
+        //       }
+            
+        //     , function (error) {
+        //       $state.go('login', null, {reload: true});
+        //       return;
+        //     });
+        //   }
+        // }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/');
