@@ -114,7 +114,7 @@ angular.module('app', ['ionic', 'firebase'])
       url: '/status',
       views: {
         'menuContent' :{
-          templateUrl: "templates/social/flist.html",
+          templateUrl: "templates/social/friends.html",
         }
       }
     })
