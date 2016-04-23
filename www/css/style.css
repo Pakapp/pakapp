@@ -9,7 +9,9 @@ body * {
   font-family: 'OpenSans', Fallback, sans-serif;
 }
 
-
+.no-padding {
+    padding: 0px !important;
+}
 
 
 /*Miscellaneous*/

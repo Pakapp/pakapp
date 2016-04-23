@@ -1,7 +1,7 @@
 {
-  "name": "pak",
+  "name": "verdeli",
   "version": "1.1.1",
-  "description": "pak: An Ionic project",
+  "description": "verdeli",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",

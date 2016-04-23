@@ -56,8 +56,8 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('app.home', {
-      url: '/',
+    .state('app.products', {
+      url: '/products',
       views: {
         'menuContent' :{
           templateUrl: "templates/social/feed.html",
@@ -92,7 +92,34 @@ angular.module('app', ['ionic', 'firebase'])
       // }
     })
 
-    .state('start', {
+    .state('app.profile', {
+      url: '/profile',
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/social/profile.html",
+        }
+      }
+    })
+
+    .state('app.history', {
+      url: '/history',
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/social/timeline.html",
+        }
+      }
+    })
+
+    .state('app.status', {
+      url: '/status',
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/social/flist.html",
+        }
+      }
+    })
+
+    .state('app.start', {
       url: "/start",
       views: {
         'menuContent' :{
@@ -101,7 +128,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('fgrid', {
+    .state('app.fgrid', {
       url: "/fgrid",
       views: {
         'menuContent' :{
@@ -110,7 +137,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('flist', {
+    .state('app.flist', {
       url: "/flist",
       views: {
         'menuContent' :{
@@ -119,7 +146,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('newpost', {
+    .state('app.newpost', {
       url: "/newpost",
       views: {
         'menuContent' :{
@@ -128,7 +155,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('email', {
+    .state('app.email', {
       url: "/email",
       views: {
         'menuContent' :{
@@ -146,7 +173,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('timeline', {
+    .state('app.timeline', {
       url: "/timeline",
       views: {
         'menuContent' :{
@@ -155,7 +182,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('editprofile', {
+    .state('app.editprofile', {
       url: "/editprofile",
       views: {
         'menuContent' :{
@@ -164,7 +191,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('profiletwo', {
+    .state('app.profiletwo', {
       url: "/profiletwo",
       views: {
         'menuContent' :{
@@ -173,7 +200,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('profilethree', {
+    .state('app.profilethree', {
       url: "/profilethree",
       views: {
         'menuContent' :{
@@ -182,7 +209,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('news', {
+    .state('app.news', {
       url: "/news",
       views: {
         'menuContent' :{
@@ -191,7 +218,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('viewpost', {
+    .state('app.viewpost', {
       url: "/viewpost",
       views: {
         'menuContent' :{
@@ -200,7 +227,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('viewposttwo', {
+    .state('app.viewposttwo', {
       url: "/viewposttwo",
       views: {
         'menuContent' :{
@@ -209,7 +236,7 @@ angular.module('app', ['ionic', 'firebase'])
       }
     })
 
-    .state('invite', {
+    .state('app.invite', {
       url: "/invite",
       views: {
         'menuContent' :{
@@ -286,7 +313,7 @@ angular.module('app', ['ionic', 'firebase'])
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/');
+  $urlRouterProvider.otherwise('/app/products');
 })
 
  .constant('FirebaseUrl', 'https://pakapp.firebaseio.com/');

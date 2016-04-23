@@ -1,5 +1,5 @@
 <!-- Title for the ion view -->
-<ion-view title="Feeds">
+<ion-view title="Products">
   <!-- ======================
   LEFT SIDE BUTTON
   ====================== -->
@@ -28,12 +28,12 @@
     <!-- ======================
     SEARCH FORM - STANDARD IONIC MARKUP
     ====================== -->  
-    <div class="item item-input-inset">
+<!--     <div class="item item-input-inset">
       <label class="item-input-wrapper">
         <i class="icon ion-search placeholder-icon"></i>
         <input type="text" placeholder="Search package">
       </label>
-    </div>
+    </div> -->
     <!-- ======================
     /END SEARCH FORM
     ====================== -->
@@ -42,7 +42,7 @@
       <!-- ======================
       POST - image only
       ====================== --> 
-      <div class="news-media">
+      <div class="news-media row-no-padding">
         <img src="img/gemionic/news-image.jpg" alt="" class="fluid-image">
         <div class="media-social-stats">
           <button ng-show="profile.subscriptions[pk.$id]" class="button button-small button-borderless button-positive"><i class="icon ion-heart"></i></button>
@@ -64,8 +64,10 @@
           <div class="gem-tiny-text news-item-stats">
             <i class="icon ion-checkmark-circled"></i> Available in your area
             <span class="news-comment-summary">
-              <i class="icon ion-heart"></i> 2 
-              <i class="icon ion-chatbubble"></i> 3
+              <!-- Likes -->
+              <i class="icon ion-heart"></i> 2  
+              <!-- Ordered -->
+              <i class="icon ion-ios-cart"></i> 3
             </span>
           </div>
         </div>

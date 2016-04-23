@@ -4,14 +4,14 @@
     <ion-nav-bar class="bar-light nav-title-slide-ios7">
       <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
     </ion-nav-bar>
-    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    <ion-nav-view menu-close name="menuContent" animation="slide-left-right"></ion-nav-view>
   </ion-side-menu-content>
   <ion-side-menu side="left">
     
     <!-- Sidebar Content -->
     <ion-content class="gem-sidebar dark">
       <!-- Profile Box - Extends ionic's .row -->
-      <div class="row gem-sidebar-profile-box">
+      <div class="row gem-sidebar-profile-box" nav-clear menu-close ui-sref="app.profile">
         <!-- Profile Thumb -->
         <div class="col col-25">
           <img src="{{profile.profile_image}}" class="gem-profile-image" alt="">
@@ -21,7 +21,7 @@
         <!-- Profile Name -->
         <div class="col col-50">
           <h5 class="title">{{profile.firstname}} {{profile.lastname}}</h5>
-          <h6 class="action-links">Likes | Others</h6>
+          <!-- <h6 class="action-links">Likes | Others</h6> -->
         </div>
         <!-- End Profile Name -->
 
@@ -35,8 +35,11 @@
       <!-- End Profile Box -->
       <ion-list>        
         <ion-item class="item-ng-click" nav-clear menu-close ng-click="logout()">Logout</ion-item>
-        <ion-item nav-clear menu-close href="#/app/feed">Feed</ion-item>
-        <ion-item nav-clear menu-close href="#/app/start">Starter View</ion-item>
+        <ion-item nav-clear menu-close ui-sref="app.products">Products</ion-item>
+        <ion-item nav-clear menu-close ui-sref="app.history">Order History</ion-item>
+        <ion-item nav-clear menu-close ui-sref="app.status">Delivery Status</ion-item>
+        
+ <!--        <ion-item nav-clear menu-close href="#/app/start">Starter View</ion-item>
         <ion-item nav-clear menu-close href="#/app/viewpost">View Post (2)</ion-item>
         <ion-item nav-clear menu-close href="#/app/viewposttwo">View Post</ion-item>
         <ion-item nav-clear menu-close href="#/app/fgrid">Friend (Grid)</ion-item>
@@ -45,11 +48,11 @@
         <ion-item nav-clear menu-close href="#/app/email">Send Mail</ion-item>
         <ion-item nav-clear menu-close href="#/app/profile">Profile</ion-item>
         <ion-item nav-clear menu-close href="#/app/profiletwo">Profile 2</ion-item>
-        <ion-item nav-clear menu-close href="#/app/profilethree">Profile 3</ion-item>
-        <ion-item nav-clear menu-close href="#/app/editprofile">Edit Profile</ion-item>
-        <ion-item nav-clear menu-close href="#/app/timeline">Timeline</ion-item>
+        <ion-item nav-clear menu-close href="#/app/profilethree">Profile 3</ion-item> -->
+        <!-- <ion-item nav-clear menu-close href="#/app/editprofile">Profile</ion-item> -->
+      <!--   <ion-item nav-clear menu-close href="#/app/timeline">Timeline</ion-item>
         <ion-item nav-clear menu-close href="#/app/invite">Invite</ion-item>
-        <ion-item nav-clear menu-close href="#/app/news">News</ion-item>
+        <ion-item nav-clear menu-close href="#/app/news">News</ion-item> -->
 
 
       </ion-list>
